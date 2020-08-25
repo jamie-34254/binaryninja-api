@@ -35,6 +35,8 @@ struct ParseException: public std::runtime_error, rapidjson::ParseResult
 
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/writer.h"
 
 #if defined(__GNUC__) && __GNUC__ >= 8
 #pragma GCC diagnostic pop
