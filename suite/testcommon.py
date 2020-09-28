@@ -1423,3 +1423,16 @@ class VerifyBuilder(Builder):
         assert(test_helper(binja.PossibleValueSet.in_set_of_values([1,2,3,4])))
         assert(test_helper(binja.PossibleValueSet.not_in_set_of_values([1,2,3,4])))
         return True
+
+    def test_load_old_databse(self):
+        """Load a database produced by Binary Ninja v1.2.1921"""
+        file_name = os.path.join(os.path.dirname(__file__), self.test_store, "..", "binja_v1.2.1921_bin_ls.bndb")
+        if not os.path.exists(file_name):
+            return False
+
+        try:
+            view = BinaryViewType.get_view_of_file(file_name)
+        except:
+            return False
+        else:
+            return True
