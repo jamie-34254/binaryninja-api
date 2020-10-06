@@ -1206,6 +1206,11 @@ public:
         return *this;
     }
 
+    GenericValue& AddMember(GenericValue& name, BinaryNinjaCore::string& value, Allocator& allocator) {
+        GenericValue v(value.data(), allocator);
+        return AddMember(name, v, allocator);
+    }
+
     //! Add a constant string value as member (name-value pair) to the object.
     /*! \param name A string value as name of member.
         \param value constant string reference as value of member.
@@ -1544,6 +1549,11 @@ public:
             Reserve(data_.a.capacity == 0 ? kDefaultArrayCapacity : (data_.a.capacity + (data_.a.capacity + 1) / 2), allocator);
         GetElementsPointer()[data_.a.size++].RawAssign(value);
         return *this;
+    }
+
+    GenericValue& PushBack(BinaryNinjaCore::string value, Allocator& allocator) {
+        GenericValue v(value.c_str(), allocator);
+        return PushBack(v, allocator);
     }
 
 #if RAPIDJSON_HAS_CXX11_RVALUE_REFS
