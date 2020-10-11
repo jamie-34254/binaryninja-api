@@ -20,7 +20,7 @@ struct GenericException: public std::exception
 	}
 };
 
-#define RAPIDJSON_HAS_STDSTRING 1
+#define RAPIDJSON_HAS_STDSTRING 0
 #define RAPIDJSON_HAS_CXX11_NOEXCEPT 0
 #define RAPIDJSON_ASSERT(x) do {if (!(x)) throw GenericException(); } while(0);
 #define RAPIDJSON_PARSE_ERROR_NORETURN(parseErrorCode,offset) \
