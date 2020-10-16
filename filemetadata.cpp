@@ -350,6 +350,12 @@ Ref<BinaryView> FileMetadata::GetViewOfType(const string& name)
 }
 
 
+bool FileMetadata::IsSnapshotDataAppliedWithoutError() const
+{
+	return BNIsSnapshotDataAppliedWithoutError(m_object);
+}
+
+
 SaveSettings::SaveSettings()
 {
 	m_object = BNCreateSaveSettings();

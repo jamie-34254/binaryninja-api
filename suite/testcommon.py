@@ -1296,7 +1296,14 @@ class VerifyBuilder(Builder):
                         found = True
                 assert(found)
 
-            os.unlink(temp_name)
+            for i in range(5):
+                    try:
+                        time.sleep(1)
+                        os.unlink(temp_name)
+                        break
+                    except OSError:
+                        print("Failed to remove file {}".format(temp_name))
+                        continue
             return True
 
     def test_possiblevalueset_ser_and_deser(self):
@@ -1335,7 +1342,14 @@ class VerifyBuilder(Builder):
 
                     assert(def_ins.get_possible_reg_values_after('r3') == value)
 
-                os.unlink(temp_name)
+                for i in range(5):
+                    try:
+                        time.sleep(1)
+                        os.unlink(temp_name)
+                        break
+                    except OSError:
+                        print("Failed to remove file {}".format(temp_name))
+                        continue
                 return True
 
         assert(test_helper(binja.PossibleValueSet.constant(0)))
@@ -1346,15 +1360,16 @@ class VerifyBuilder(Builder):
         assert(test_helper(binja.PossibleValueSet.not_in_set_of_values([1,2,3,4])))
         return True
 
-    def test_load_old_databse(self):
+    def test_load_old_database(self):
         """Load a database produced by Binary Ninja v1.2.1921"""
         file_name = os.path.join(os.path.dirname(__file__), self.test_store, "..", "binja_v1.2.1921_bin_ls.bndb")
         if not os.path.exists(file_name):
             return False
 
         with BinaryViewType.get_view_of_file(file_name) as bv:
-            # TODO: this actually does NOT know whether recoverable exceptions are thrown during the loading,
-            # e.g., when file is valid but snapshot failed to load
-            return True
+            if bv is None:
+                return False
+            if bv.file.snapshot_data_applied_without_error:
+                return True
 
         return False

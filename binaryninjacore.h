@@ -2618,6 +2618,8 @@ __attribute__ ((format (printf, 1, 2)))
 
 	BINARYNINJACOREAPI BNBinaryView* BNGetFileViewOfType(BNFileMetadata* file, const char* name);
 
+	BINARYNINJACOREAPI bool BNIsSnapshotDataAppliedWithoutError(BNFileMetadata* view);
+
 	// Binary view access
 	BINARYNINJACOREAPI BNBinaryView* BNNewViewReference(BNBinaryView* view);
 	BINARYNINJACOREAPI void BNFreeBinaryView(BNBinaryView* view);

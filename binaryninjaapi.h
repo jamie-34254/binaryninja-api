@@ -907,6 +907,8 @@ __attribute__ ((format (printf, 1, 2)))
 		void MarkFileModified();
 		void MarkFileSaved();
 
+		bool IsSnapshotDataAppliedWithoutError() const;
+
 		bool IsBackedByDatabase() const;
 		bool CreateDatabase(const std::string& name, BinaryView* data, Ref<SaveSettings> settings);
 		bool CreateDatabase(const std::string& name, BinaryView* data,
