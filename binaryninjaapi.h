@@ -43,8 +43,9 @@
 #define NOEXCEPT noexcept
 #endif
 
-//#define BN_REF_COUNT_DEBUG  // Mac OS X only, prints stack trace of leaked references
-
+#ifndef WIN32
+#define BN_REF_COUNT_DEBUG  // For Mac OS X and Linux, prints stack trace of leaked references
+#endif
 
 namespace BinaryNinja
 {
